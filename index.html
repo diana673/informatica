@@ -2,105 +2,419 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Anuario</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cursos de Informática</title>
+
+  <!-- Íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     body {
       margin: 0;
-      padding: 20px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Roboto', sans-serif;
       background-image: url('fondo.jpg');
       background-size: cover;
-      background-position: center;
       background-attachment: fixed;
-      backdrop-filter: brightness(0.9);
+      background-position: center;
+      color: #333;
     }
 
-    h1 {
+    header {
+      background-color: rgba(30, 42, 56, 0.9);
+      padding: 20px;
+      color: white;
       text-align: center;
-      font-family: 'Brush Script MT', cursive;
-      font-size: 60px;
-      color: #fff;
-      margin-bottom: 40px;
-      text-shadow: 3px 3px 10px rgba(0,0,0,0.7);
     }
 
-    .contenedor {
+    header h1 {
+      font-size: 48px;
+      color: #00c6ff;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      background-clip: text;
+     -webkit-text-fill-color: transparent;
+     text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+     letter-spacing: 3px;
+     text-transform: uppercase;
+     animation: brillo 3s ease-in-out infinite alternate;
+}
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0 0;
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      gap: 25px;
+      gap: 20px;
     }
 
-    iframe {
-      flex: 1 1 350px; /* Crece, encoge, base 350px */
-      max-width: 350px;
-      height: 500px;
-      border: none;
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      min-width: 200px; /* evitar que se haga muy pequeño */
+    nav a {
+      color: #aeeaff;
+      text-decoration: none;
+      font-weight: bold;
     }
 
-    iframe:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    .cursos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 40px 20px;
     }
 
-    /* MEDIA QUERY para móviles */
-    @media (max-width: 768px) {
-      .contenedor {
-        gap: 15px;
-      }
-      iframe {
-        flex: 1 1 calc((100% - 30px) / 3); /* 3 tarjetas por fila, descontando gap */
-        max-width: none;
-        height: 320px; /* menos alto para que no ocupe mucho */
-        min-width: unset;
-      }
+    .curso {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      cursor: pointer;
     }
 
-    /* MEDIA QUERY para pantallas muy pequeñas (ej: móvil muy pequeño o vertical estrecho) */
-    @media (max-width: 400px) {
-      iframe {
-        flex: 1 1 calc((100% - 20px) / 2); /* 2 tarjetas por fila */
-        height: 280px;
-      }
+    .curso img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .pantalla-texto {
+      position: absolute;
+      top: 25%;
+      left: 10%;
+      width: 80%;
+      height: 50%;
+      background-color: rgba(255, 255, 255, 0.85);
+      color: #000;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .pantalla-texto h2 {
+      font-size: 16px;
+      margin: 0 0 5px;
+    }
+
+    .profesora {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .profesora h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .redes {
+      margin-top: 20px;
+    }
+
+    .redes a, .redes p {
+      display: inline-block;
+      margin: 8px 12px;
+      padding: 8px 12px;
+      background-color: #ffffff20;
+      border-radius: 8px;
+      color: #1e2a38;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .redes a:hover {
+      background-color: #aeeaff;
+      color: #1e2a38;
+    }
+
+    .redes i {
+      margin-right: 6px;
+    }
+
+    footer {
+      background-color: rgba(30, 42, 56, 0.9);
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.7);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+    }
+
+    .close {
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: red;
+    }
+
+    .img-modal {
+      width: 80%;
+      max-width: 300px;
+      display: block;
+      margin: 20px auto 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
   </style>
 </head>
 <body>
-  <h1>Anuario de 12vo Info "2"</h1>
-  <div class="contenedor">
-    <iframe scrolling="no" src="Tarjeta mia/tarjeta.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Josiel/josiel.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta kendy/kendy.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Cecilia/ceci.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Genesis/perfil.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Suany/suany.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Anderson/Anderson.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Allan/index.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Daniela/index.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Carlos/CarlosPerez.html"></iframe>
-    <iframe scrolling="no" src="Trajeta Estefany/Estefany.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Manuel/Manuel.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Nahomy/index.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Meydi/trabajo.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Axel/tarjeta.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Odalis/Tarjeta_Adali.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta  Justin/index.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Isaac/index.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Ortiz/Untitled-3.html"></iframe>  
-    <iframe scrolling="no" src="Tarjeta Lester/tarjeta lester.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Sara/ejemplo.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Fernanda/ejercicio.html"></iframe>
-    <iframe scrolling="no" src="tarjeta kimberly/kim.html"></iframe>
-    <iframe scrolling="no" src="tarjeta juli/tarjeta.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Joshua/index.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta sosa/Untitled-3.html"></iframe>
-    <iframe scrolling="no" src="tarjeta lester2/tarjeta.html"></iframe>
-    <iframe scrolling="no" src="Tarjeta Diego/Diego.html"></iframe>
+
+  <header>
+    <h1>Cursos de Informática💻</h1>
+    <nav>
+      <ul>
+        <li><a href="#cursos">Cursos🖥️</a></li>
+        <li><a href="#mensaje">Mensaje para ti☺️</a></li>
+        <li><a href="#profesora">Más información💡</a></li>
+        <li><a href="Album.html">Tarjetas🪪</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section id="cursos" class="cursos">
+    <div class="curso" onclick="abrirModal('modal1')">
+      <img src="cursos rene/programacion.jpg" alt="Curso 1">
+      <div class="pantalla-texto">
+        <h2>Introducción a la Programación💻</h2>
+        <p>Lógica, algoritmos y estructuras básicas.</p>
+      </div>
+    </div>
+
+    <div class="curso" onclick="abrirModal('modal2')">
+      <img src="cursos rene/Diseño web.jpg" alt="Curso 2">
+      <div class="pantalla-texto">
+        <h2>Diseño Web🎨</h2>
+        <p>HTML, CSS y sitios responsivos.</p>
+      </div>
+    </div>
+
+    <div class="curso" onclick="abrirModal('modal3')">
+      <img src="cursos rene/Inteligencia.jpg" alt="Curso 3">
+      <div class="pantalla-texto">
+        <h2>Inteligencia Artificial🧠</h2>
+        <p>Ciberseguridad y protección de datos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modales -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal('modal1')">&times;</span>
+      <h2>Introducción a la Programación</h2>
+      <p>Te preguntas, ¿Qué es la programación?</p>
+      <p>Aqui te lo explico. La programación es el proceso de crear instrucciones que una computadora puede entender y ejecutar. Es decir, le enseñamos a una máquina qué hacer, paso a paso, a través de un lenguaje especial llamado lenguaje de programación.</p>
+
+<p>Cuando programas, estás resolviendo problemas de forma lógica y precisa. Es como enseñarle a una computadora a hacer tareas por ti, como mostrar una página web, sumar números, hacer una calculadora o incluso controlar robots.</p>
+      <img src="cursos rene/progra.jpg" alt="Programación" class="img-modal">
+<h2>La programacion sirve para:</h2>
+<ul>
+<li>Crear aplicaciones móviles y programas de computadora</i>
+<li>Diseñar páginas web</li>
+<li>Automatizar tareas repetitivas</li>
+<li>Desarrollar videojuegos</li>
+<li>Controlar dispositivos inteligentes (domótica, robótica)</li>
+<li>Entender mejor cómo funciona la tecnología que usamos a diario</li>
+</ul>
+<h2>En este curso veremos:</h2>
+<p>En este curso de Introducción a la Programación, aprenderás:</p>
+<ol>
+<li>Lógica de programación: cómo pensar como un programador, analizando problemas y buscando soluciones paso a paso.</li>
+<li>Sintaxis básica de Python: uno de los lenguajes más usados por su facilidad y potencia.</li>
+<li>Estructuras básicas:</li>
+<ul>
+<li>Variables (guardar información)</li>
+<li>Condicionales (tomar decisiones)</li>
+<li>Bucles (repetir acciones)</li>
+<li>Funciones (crear tus propios comandos)</li>
+</ul>
+<li>Entrada y salida de datos: cómo interactuar con el usuario.</li>
+<li>Pequeños proyectos como:</li>
+<ul>
+<li>Calculadoras</li>
+<li>Juegos sencillos</li>
+<li>Programas que resuelven problemas matemáticos</li>
+</ul>
+<p>Al finalizar este curso, tendras las bases para seguir aprendiendo programacion por tu cuenta, empezar otros lenguajes o incluso crear tus propios proyectos simples. Estaras dando tus primeros pasos en un campo con muchas oportunidades profesionales</p>
+<div style="text-align: center; margin-top: 20px;">
+  <p>¿Te interesa este curso?</p>
+  <button onclick="alert('¡Gracias por tu interés! Puedes comunicarte con nosotros en nuestras redes sociales o por la plataforma de whatsApp, todo eso te lo dejamos al final de la pagina. 😊')" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer;">
+    Sí, me interesa
+  </button>
+</div>
+    </div>
   </div>
+
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal('modal2')">&times;</span>
+      <h2>Diseño Web</h2>
+      <p>El diseño web es el proceso de planificar, crear y organizar elementos visuales y funcionales de un sitio web, con el objetivo de que sea atractivo, fácil de usar y accesible desde cualquier dispositivo (computadora, celular, tablet).</p>
+
+<p>No se trata solo de que el sitio “se vea bonito”, sino de que también funcione bien y ofrezca una buena experiencia al usuario.</p>
+      <img src="cursos rene/diseno.jpg" alt="Diseño Web" class="img-modal">
+<h2>En este curso aprenderas:</h2>
+<p>✅<strong> HTML (HyperText Markup Language)</strong>
+Es el lenguaje que se usa para estructurar el contenido de una página: títulos, párrafos, imágenes, enlaces, formularios, etc.</p>
+
+<p>✅<strong> CSS (Cascading Style Sheets)</strong>
+Es lo que le da estilo al HTML. Con CSS puedes cambiar colores, tamaños, tipografías, márgenes, sombras, etc.</p>
+
+<p>✅<strong> Diseño Responsive</strong>
+Aprenderás a hacer páginas que se adapten automáticamente al tamaño de pantalla (celular, tablet, PC), usando técnicas como media queries o frameworks como Bootstrap.</p>
+
+<p>✅ <strong>Principios de Diseño Visual</strong>
+Colores, tipografía, equilibrio, contraste, alineación, y cómo estos elementos ayudan a comunicar mejor una idea.</p>
+
+<p>✅ <strong>Experiencia de Usuario (UX) y Accesibilidad</strong>
+Cómo hacer que los sitios sean fáciles de navegar, claros y accesibles para todos, incluyendo personas con discapacidades.</P>
+
+<p>✅ <strong>Herramientas de diseño</strong>
+Introducción a programas como Figma o Canva para diseñar prototipos antes de pasar al código.</p>
+
+<p>✅<strong> Publicar tu sitio web</strong>
+Cómo subir tu página a Internet para que cualquier persona pueda verla.</p>
+<h2>💡¿Porque estudiar diseño web?</h2>
+<ul>
+<p><li>Porque el mundo digital necesita personas creativas y con buen gusto.</li></p>
+<p><li>Porque puedes trabajar de forma independiente o para empresas.</li></p>
+<p><li>Porque puedes ayudar a pequeños negocios a tener presencia online.</li></p>
+<p><li>Porque es una mezcla perfecta entre arte y tecnología.</li></p>
+</ul>
+<h2>Al terminar este curso sabras:</h2>
+<ol>
+<p><li>🖥️ Crear una página web completa desde cero utilizando HTML y CSS.</li></p>
+<p><li>🎨 Aplicar estilos visuales atractivos, como colores, tipografías, márgenes y efectos con CSS.</li></p>
+<p><li>📱 Diseñar sitios adaptables (responsive) que funcionen bien en computadoras, celulares y tablets.</li></p>
+<p><li>🧭 Organizar la estructura y navegación de un sitio para que los visitantes encuentren fácilmente lo que buscan.</li></p>
+<p><li>🔧 Editar y actualizar tu sitio web cuando lo necesites, sin depender de terceros.</li></p>
+<p><li>🌐 Publicar tu sitio en Internet, usando plataformas gratuitas o de pago.</li></p>
+<p><li>✨ Utilizar herramientas de diseño visual como Figma o Canva para planificar antes de codificar.</li></p>
+<p><li>👩‍💼 Tener una base para seguir aprendiendo y especializarte en áreas como diseño UI/UX, desarrollo frontend o diseño gráfico digital.</li></p>
+<div style="text-align: center; margin-top: 20px;">
+  <p>¿Te interesa este curso?</p>
+  <button onclick="alert('¡Gracias por tu interés! Puedes comunicarte con nosotros en nuestras redes sociales o por la plataforma de whatsApp, todo eso te lo dejamos al final de la pagina. 😊')" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer;">
+    Sí, me interesa
+  </button>
+</div>
+
+    </div>
+  </div>
+
+  <div id="modal3" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal('modal3')">&times;</span>
+      <h2>Inteligencia Artificial(IA)</h2>
+      <p>La Inteligencia Artificial (IA) es una rama de la informática que se encarga de crear sistemas capaces de realizar tareas que normalmente requieren inteligencia humana, como reconocer imágenes, entender el lenguaje, tomar decisiones o aprender de la experiencia.</p>
+      <img src="cursos rene/ia.jpg" alt="Inteligencia Artificial" class="img-modal">
+<h2>En este curso aprenderas:</h2>
+<p>Durante el curso de Inteligencia Artificial para principiantes, verás temas como:</p>
+<ul>
+<p><li>🤖 <strong>¿Qué es la IA y cómo funciona?</strong> (conceptos básicos)</li></p>
+<p><li>🧠 <strong>Tipos de IA:</strong> desde asistentes como Siri hasta redes neuronales.</li></p>
+<p><li>🧩 <strong>Machine Learning (aprendizaje automático):</strong> cómo las máquinas aprenden a partir de datos.</li></p>
+<p><li>📊 <strong>Aplicaciones reales:</strong> en salud, educación, negocios, videojuegos, etc.</li></p>
+<p><li>🛡️ <strong>Ciberseguridad básica:</strong> cómo proteger tu información en el mundo digital.</li></p>
+<p><li>📱 <strong>IA en la vida diaria:</strong> filtros de redes sociales, traductores automáticos, recomendaciones de películas, y más.</li></p>
+</ul>
+<h2>¿Porque estudiar Inteligencia Artificial?</h2>
+<ol>
+<p><li>🌐Esta en todas partes.</li></p>
+<p><li>💼Es una de las profesiones del futuro.</li></p>
+<p><li>💡Desarrolla tu pensamiento logico y critico.</li></p>
+<p><li>🔐Te ayuda a protegerte en el mundo digital.</li></p>
+<p><li>🛩️Es el primer paso para un gran camino.</li></p>
+<h2>Al finalizar este curso sabras:</h2></li></p>
+<ul>
+<p><li>Comprenderás qué es la IA y cómo está presente en tu vida cotidiana.</li></p>
+<p><li>Sabrás cómo funcionan sistemas inteligentes básicos.</li></p>
+<p><li>Tendrás herramientas para identificar riesgos y buenas prácticas digitales.</li></p>
+<p><li>Estarás preparado/a para seguir aprendiendo temas más avanzados como programación para IA o ciencia de datos.</li></p>
+</ul>
+<div style="text-align: center; margin-top: 20px;">
+  <p>¿Te interesa este curso?</p>
+  <button onclick="alert('¡Gracias por tu interés! Puedes comunicarte con nosotros en nuestras redes sociales o por la plataforma de whatsApp, todo eso te lo dejamos al final de la pagina. 😊')" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer;">
+    Sí, me interesa
+  </button>
+</div>
+    </div>
+  </div>
+  <section id="mensaje" class="mensaje para ti"
+  style="background-color: rgba(255,255,255,0.95); padding: 40px 20px; text-align: center; border-top: 2px solid #00c6ff;">
+  <h2 style="font-size: 28px; color: #0072ff; margin-bottom: 20px;">¡Anímate a transformar tu futuro con la tecnología! 🚀</h2>
+  <p style="max-width: 800px; margin: 0 auto; font-size: 18px; line-height: 1.6;">
+    La informática no es solo para expertos. Hoy, más que nunca, aprender sobre programación, diseño web o inteligencia artificial puede abrirte un mundo lleno de oportunidades. 🌍💡
+  </p>
+  <p style="max-width: 800px; margin: 20px auto; font-size: 18px; line-height: 1.6;">
+    ¿Querés crear tu propia página web, desarrollar apps, entender cómo funciona la inteligencia artificial o simplemente dominar las herramientas digitales del presente y del futuro? ¡Este es el momento perfecto para empezar! Todos los cursos están diseñados desde cero, para que cualquier persona —sin importar su edad o experiencia— pueda aprender de forma clara, práctica y divertida. 🧠✨
+  </p>
+  <p style="max-width: 800px; margin: 20px auto; font-size: 18px; line-height: 1.6;">
+    ¡No dejes que el miedo a lo desconocido te detenga! Aquí vas a tener acompañamiento, apoyo, y un espacio para crecer y descubrir de lo que sos capaz. 💪🏼💻  
+    El primer paso siempre da un poco de miedo, pero también es el más poderoso. 
+  </p>
+  <p style="font-size: 20px; color: #00c6ff; margin-top: 30px; font-weight: bold;">
+    ¡Animate hoy y empezá tu camino hacia el mundo digital! 🌐
+  </p>
+</section>
+
+  <section id="profesora" class="profesora">
+    <h2>Mis Datos🙋🏽‍♀️</h2>
+    <p>¡Hola! soy Diana, me gusta mucho lo que es la tecnologia y me a llamado siempre la atencion todos los avances q puede llegar a tener, me gusta mucho lo que es compartir mis conocimientos a otras personas q tal vez no saben lo que yo talvez si puedo llegar a saber como es esto de la informatica, me encanta enseñar de forma dinamica y divertida, porque se que la informatica no tiene porque ser aburrida. Mi mision aqui es ayudarte a dar ese primer paso en la tecnologia y impulsarte al siguente nivel, si te han interesado los cursos que anteriormente has visto puedes comunicarte conmigo por la plataforma de whatsApp o tambien puedes buscarme en mis redes sociales, espero y te animes a dar ese gran paso de conocer el mundo de la tecnologia.</p>
+    <div class="redes">
+      <a href="https://facebook.com/DianaCC" target="_blank"><i class="fab fa-facebook-square"></i> Facebook</a>
+      <a href="https://instagram.com/dianac.07" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://www.tiktok.com/@dianayc00" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+      <p><i class="fab fa-whatsapp"></i> WhatsApp: 8927-8957</p>
+    </div>
+  </section>
+  
+  
+
+  <footer>
+    <p>&copy; 2025 Cursos de Informática - Diana Castellanos</p>
+  </footer>
+
+  <script>
+    function abrirModal(id) {
+      document.getElementById(id).style.display = "block";
+    }
+
+    function cerrarModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modals = document.querySelectorAll('.modal');
+      modals.forEach(modal => {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      });
+    };
+  </script>
+
 </body>
 </html>
