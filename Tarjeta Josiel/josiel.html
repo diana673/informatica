@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta Profesional - Josiel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .background {
+            background: linear-gradient(145deg, #e6e6e6, #ffffff);
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        .card {
+            width: 300px;
+            padding: 20px;
+            margin: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+            transform: rotateY(10deg);
+            transition: transform 0.5s;
+        }
+
+        .card:hover {
+            transform: rotateY(0deg);
+        }
+
+        .card-header {
+            text-align: center;
+        }
+
+        .profile-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .card-header h1 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .card-header p {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .card-content {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.4em;
+        }
+
+        .card-footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .boton {
+            width: 80%;
+            padding: 10px;
+            background: #F5A623;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .boton:hover {
+            background: #d48810;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="card">
+            <div class="card-header">
+                <img src="fotos/mifoto.jpg" alt="Josiel Alejandro" class="profile-photo">
+                <h1>Josiel Alejandro Figueroa Banegas</h1>
+                <p>Estudiante de último año de informática.</p>
+            </div>
+            <div class="card-content">
+                <p>
+                    Me llamo Josiel Figueroa, tengo 17 años. Nací el 13 de octubre de 2007 en San Pedro Sula, Honduras.
+                    Actualmente estoy estudiando en el INTAE, y ya es mi último año en el colegio. El próximo año comenzaré la universidad.
+                </p>
+            </div>
+            <div class="card-footer">
+                <button class="boton">Contacto</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anuario</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('fondo.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      backdrop-filter: brightness(0.9);
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Brush Script MT', cursive;
+      font-size: 60px;
+      color: #fff;
+      margin-bottom: 40px;
+      text-shadow: 3px 3px 10px rgba(0,0,0,0.7);
+    }
+
+    .contenedor {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    iframe {
+      flex: 1 1 350px; /* Crece, encoge, base 350px */
+      max-width: 350px;
+      height: 500px;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      min-width: 200px; /* evitar que se haga muy pequeño */
+    }
+
+    iframe:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    /* MEDIA QUERY para móviles */
+    @media (max-width: 768px) {
+      .contenedor {
+        gap: 15px;
+      }
+      iframe {
+        flex: 1 1 calc((100% - 30px) / 3); /* 3 tarjetas por fila, descontando gap */
+        max-width: none;
+        height: 320px; /* menos alto para que no ocupe mucho */
+        min-width: unset;
+      }
+    }
+
+    /* MEDIA QUERY para pantallas muy pequeñas (ej: móvil muy pequeño o vertical estrecho) */
+    @media (max-width: 400px) {
+      iframe {
+        flex: 1 1 calc((100% - 20px) / 2); /* 2 tarjetas por fila */
+        height: 280px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Anuario de 12vo Info "2"</h1>
+  <div class="contenedor">
+    <iframe scrolling="no" src="Tarjeta mia/tarjeta.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Josiel/josiel.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta kendy/kendy.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Cecilia/ceci.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Genesis/perfil.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Suany/suany.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Anderson/Anderson.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Allan/index.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Daniela/index.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Carlos/CarlosPerez.html"></iframe>
+    <iframe scrolling="no" src="Trajeta Estefany/Estefany.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Manuel/Manuel.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Nahomy/index.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Meydi/trabajo.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Axel/tarjeta.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Odalis/Tarjeta_Adali.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta  Justin/index.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Isaac/index.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Ortiz/Untitled-3.html"></iframe>  
+    <iframe scrolling="no" src="Tarjeta Lester/tarjeta lester.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Sara/ejemplo.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Fernanda/ejercicio.html"></iframe>
+    <iframe scrolling="no" src="tarjeta kimberly/kim.html"></iframe>
+    <iframe scrolling="no" src="tarjeta juli/tarjeta.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Joshua/index.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta sosa/Untitled-3.html"></iframe>
+    <iframe scrolling="no" src="tarjeta lester2/tarjeta.html"></iframe>
+    <iframe scrolling="no" src="Tarjeta Diego/Diego.html"></iframe>
+  </div>
+</body>
+</html>
