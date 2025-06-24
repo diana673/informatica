@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tarjeta Personal</title>
+  <style>
+    body {
+      background: #f0f0f0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .tarjeta {
+      background: #ffffff;
+      width: 240px; /* antes 300px */
+      padding-top: 80px; /* antes 100px */
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .tarjeta img {
+      width: 100%;
+      height: 200px; /* antes 250px */
+      object-fit: cover;
+    }
+
+    .tarjeta h2 {
+      margin: 10px 0 5px;
+      color: #333;
+      font-size: 18px; /* opcionalmente más pequeño */
+    }
+
+    .tarjeta p {
+      padding: 0 10px;
+      color: #666;
+      font-size: 13px;
+    }
+
+    .tarjeta .botones {
+      margin: 15px 0;
+    }
+
+    .tarjeta .botones a {
+      text-decoration: none;
+      color: white;
+      background: #007bff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin: 4px;
+      display: inline-block;
+      font-size: 13px;
+      transition: background 0.3s;
+    }
+
+    .tarjeta .botones a:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tarjeta">
+    <img src="fotos/ander.jpg" alt="Foto de Anderson Galeas">
+    <h2>Anderson Galeas</h2>
+    <p>Estudiante de 12° grado, BTPI "2".</p>
+    <p>ID: 1508-2008-00011</p>
+    <p>Apasionado por el fútbol.</p>
+    <div class="botones">
+      <a href="https://www.facebook.com/anderson.galeas" target="_blank">Facebook</a>
+      <a href="https://wa.me/50433077640" target="_blank">WhatsApp</a>
+    </div>
+  </div>
+
+</body>
+</html>

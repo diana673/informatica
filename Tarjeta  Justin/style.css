@@ -1,0 +1,96 @@
+.cuadroTarjeta {
+    width: 240px;
+    height: 460px;
+    background-image: url(img/marco\ para\ carta.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    margin: 50px auto; /* centra horizontalmente y da margen arriba */
+}
+
+.circulo {
+    background-image: url(img/20241228_163959.jpg);
+    background-size: cover;
+    background-position: center;
+    border: 4px solid yellow;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    top: 30px;
+    left: 70px;
+}
+
+/* Botones */
+.personalb,
+.pasatiemposb,
+.Gustosb,
+.fotosb {
+    width: 200px;
+    height: 30px;
+    background-color: white;
+    position: absolute;
+    left: 20px;
+    font-size: 0.75rem;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.personalb:hover { background-color: crimson; }
+.pasatiemposb:hover { background-color: aqua; }
+.Gustosb:hover { background-color: blueviolet; }
+.fotosb:hover { background-color: fuchsia; }
+
+.personalb { top: 150px; }
+.pasatiemposb { top: 190px; }
+.Gustosb { top: 230px; }
+.fotosb { top: 270px; }
+
+/* Ventanas centradas */
+#ventana1,
+#ventana2,
+#ventana3,
+#ventana4 {
+    position: absolute;
+    top: 320px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 90px;
+    background-color: white;
+    border: 2px solid red;
+    border-radius: 8px;
+    display: none;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 0.8rem;
+    padding: 10px;
+    box-sizing: border-box;
+    animation: bajar 0.5s ease-in-out forwards;
+    z-index: 2;
+}
+
+#ventana4 a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: black;
+}
+#ventana4 a:hover {
+    font-size: 1.1rem;
+    color: blue;
+}
+
+@keyframes bajar {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+    to {
+        height: 90px;
+        opacity: 1;
+    }
+}
